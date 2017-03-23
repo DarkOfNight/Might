@@ -24,12 +24,12 @@ public class movement_base : MonoBehaviour {
 		if(Time.timeScale == 0)return;
 		#if UNITY_EDITOR ||  UNITY_EDITOR_WIN ||  UNITY_EDITOR_64
 		if (!isDashed && Input.GetKey ("left")&&(wall!=2)){
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(-1000f , transform.position.y, transform.position.z), 1f);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(-1000f , transform.position.y, transform.position.z), coeffID);
 			wall=0;
 		}
 
 		if (!isDashed && Input.GetKey ("right")&&(wall!=1)){
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(1000f, transform.position.y, transform.position.z), 1f);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(1000f, transform.position.y, transform.position.z), coeffID);
 			wall=0;
 		}
 		#elif UNITY_ANDROID
@@ -38,16 +38,17 @@ public class movement_base : MonoBehaviour {
          // The screen has been touched so store the touch
          Touch touch = Input.GetTouch(0);
 
+		Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)); 
+		if ((wall!=2 && if touchPosition.x < 0f) || (wall!=1 && if touchPosition.x > 0f)){
+
 		Vector3 startPos = gameObject.transform.position;
          
          if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-             // If the finger is on the screen, move the object smoothly to the touch position
-		Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));                
-		transform.position = Vector3.MoveTowards(transform.position, touchPosition, coeffID); //Time.deltaTime);
+             // If the finger is on the screen, move the object smoothly to the touch position               
+		transform.position = Vector3.MoveTowards(transform.position, new Vector3(touchPosition.x, transform.position.y, transform.position.z), coeffID); //Time.deltaTime);
          }
-       	
-		gameObject.transform.position = new Vector3(gameObject.transform.position.x, startPos.y, startPos.z);
            		wall=0;
+		}
 		}
 		#endif
 	}

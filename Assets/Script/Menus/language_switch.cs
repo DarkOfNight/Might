@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class language_switch : MonoBehaviour {
 
 	public Text[] menuOption, menuPrincipal, menuPause, menuSelection, menuCredit;
-	string[,] language = new string[3, 15];
+	string[,] language = new string[3, 16];
 
 	void Awake(){
 		ChangeDictionnaire ();
@@ -83,6 +83,14 @@ public class language_switch : MonoBehaviour {
 		language [0, 14] = "Quitter";
 		language [1, 14] = "Quit";
 		language [2, 14] = "Abandonar";
+
+		// All -- Chargement
+
+
+		language [0, 15] = "Veuillez Patienter";
+		language [1, 15] = "Please Wait";
+		language [2, 15] = "Espere Por Favor";
+
 			
 	}
 
@@ -118,6 +126,8 @@ public class language_switch : MonoBehaviour {
 		PlayerPrefs.SetString("Langue.MenuPause_1", language[langueID, 13]);
 		PlayerPrefs.SetString("Langue.MenuPause_2", language[langueID, 2]);
 		PlayerPrefs.SetString("Langue.MenuPause_3", language[langueID, 14]);
+
+		PlayerPrefs.SetString("Langue.MenuChargement_0", language[langueID, 15]);
 
 		PlayerPrefs.Save ();
 	}

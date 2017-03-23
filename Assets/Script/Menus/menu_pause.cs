@@ -30,6 +30,8 @@ public class menu_pause : MonoBehaviour {
 			else
 				Time.timeScale = 1f;
 			isPaused = !isPaused;
+			if (!isPaused)
+				Options (isPaused);
 			menuPause.SetActive (isPaused);
 
 
