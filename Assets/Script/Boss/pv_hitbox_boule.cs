@@ -4,6 +4,7 @@ using System.Collections;
 public class pv_hitbox_boule : MonoBehaviour {
 
 	int PV=15;
+	bool fin=false;
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){
 		switch (col.gameObject.tag) {
@@ -45,8 +46,13 @@ public class pv_hitbox_boule : MonoBehaviour {
 	void Update(){
 		if (PV <= 0) {
 			gameObject.GetComponentInParent<pv_papatte> ().PV_papatte -= 1;
-			Destroy (gameObject);
+			Destroy (gameObject.GetComponent<CircleCollider2D>());
+			PV = 1;
+			fin = true;
 		}
+		if (fin)
+			gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1f);
+		
 	}
 
 	IEnumerator flash() {

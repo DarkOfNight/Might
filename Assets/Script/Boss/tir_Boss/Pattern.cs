@@ -4,7 +4,7 @@ using System.Collections;
 public class Pattern : MonoBehaviour {
 
 	public int attaque = 0;
-	private bool block=false;
+	private bool block=true;
 	public GameObject PatteGauche;
 	public GameObject PatteDroite;
 
