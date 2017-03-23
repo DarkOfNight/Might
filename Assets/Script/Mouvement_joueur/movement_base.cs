@@ -3,10 +3,13 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class movement_base : MonoBehaviour {
-	public  float vitesse;
-	public float coeffPos = 0f;
-	public Slider slide;
+	float[] coeffVitesse = {1.3f, 1.3f, 1f, 1.3f};
+	float coeffID = 1f;
 	public int wall=0;
+
+	void Start() {
+		coeffID = coeffVitesse [int.Parse (PlayerPrefs.GetString ("Play.VaisseauID", "0"))];
+	}
 
 	void OnTriggerEnter2D(Collider2D mur){
 		if (mur.gameObject.name == "MurDroit")
@@ -21,12 +24,12 @@ public class movement_base : MonoBehaviour {
 		if(Time.timeScale == 0)return;
 		#if UNITY_EDITOR ||  UNITY_EDITOR_WIN ||  UNITY_EDITOR_64
 		if (!isDashed && Input.GetKey ("left")&&(wall!=2)){
-			gameObject.transform.Translate(new Vector3 (- vitesse, 0)*Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(-1000f , transform.position.y, transform.position.z), 1f);
 			wall=0;
 		}
 
 		if (!isDashed && Input.GetKey ("right")&&(wall!=1)){
-			gameObject.transform.Translate(new Vector3 (vitesse, 0)*Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(1000f, transform.position.y, transform.position.z), 1f);
 			wall=0;
 		}
 		#elif UNITY_ANDROID
@@ -40,7 +43,7 @@ public class movement_base : MonoBehaviour {
          if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
              // If the finger is on the screen, move the object smoothly to the touch position
 		Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));                
-             transform.position = Vector3.Lerp(transform.position, touchPosition, Time.deltaTime*1.5f);
+		transform.position = Vector3.MoveTowards(transform.position, touchPosition, coeffID); //Time.deltaTime);
          }
        	
 		gameObject.transform.position = new Vector3(gameObject.transform.position.x, startPos.y, startPos.z);
@@ -51,11 +54,8 @@ public class movement_base : MonoBehaviour {
 
 
 	void Awake() { 
-
-
 		#if !UNITY_ANDROID
 		#else
-
 		Input.multiTouchEnabled = true;
 		#endif
 
