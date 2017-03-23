@@ -14,31 +14,31 @@ public class pv_hitbox_boule : MonoBehaviour {
 				break;
 			case "TirJoueur2PV":
 				PV -= 2;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 			case "TirJoueur3PV":
 				PV -= 3;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 			case "TirJoueur4PV":
 				PV -= 4;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 			case "TirJoueur5PV":
 				PV -= 5;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 			case "TirJoueur6PV":
 				PV -= 6;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 			case "TirJoueur7PV":
 				PV -= 7;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 			case "TirJoueur8PV":
 				PV -= 8;
-			StartCoroutine (flash ());
+				StartCoroutine (flash ());
 			break;
 		}
 	}
