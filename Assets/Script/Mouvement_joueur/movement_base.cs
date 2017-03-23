@@ -39,7 +39,7 @@ public class movement_base : MonoBehaviour {
          Touch touch = Input.GetTouch(0);
 
 		Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)); 
-		if ((wall!=2 && if touchPosition.x < 0f) || (wall!=1 && if touchPosition.x > 0f)){
+		if ((wall!=2 && touchPosition.x < 0f) || (wall!=1 && touchPosition.x > 0f)){
 
 		Vector3 startPos = gameObject.transform.position;
          
