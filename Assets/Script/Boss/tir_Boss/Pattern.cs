@@ -13,6 +13,7 @@ public class Pattern : MonoBehaviour {
 	}
 
 	void Update () {
+		if(Time.timeScale == 0)return;
 		if (PatteGauche == null && PatteDroite == null) {
 			gameObject.AddComponent<Pattern2> ();
 			Destroy (gameObject.GetComponent<bestial>());

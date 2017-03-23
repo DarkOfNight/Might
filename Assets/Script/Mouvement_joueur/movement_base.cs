@@ -31,12 +31,20 @@ public class movement_base : MonoBehaviour {
 		}
 		#elif UNITY_ANDROID
 
-		if (Input.touchCount > 0){
-		float touchPos = Input.GetTouch(0).deltaPosition.x;
-		if (!isDashed && (wall!=1 && wall != 2)){
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3 (touchPos, gameObject.transform.position.y), vitesse);
-				wall=0;
-			}
+		if (Input.touchCount > 0 && !isDashed && (wall!=1 && wall != 2)) {
+         // The screen has been touched so store the touch
+         Touch touch = Input.GetTouch(0);
+
+		Vector3 startPos = gameObject.transform.position;
+         
+         if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
+             // If the finger is on the screen, move the object smoothly to the touch position
+		Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));                
+             transform.position = Vector3.Lerp(transform.position, touchPosition, Time.deltaTime*1.5f);
+         }
+       	
+		gameObject.transform.position = new Vector3(gameObject.transform.position.x, startPos.y, startPos.z);
+           		wall=0;
 		}
 		#endif
 	}
@@ -49,25 +57,7 @@ public class movement_base : MonoBehaviour {
 		#else
 
 		Input.multiTouchEnabled = true;
-		StartCoroutine(MoveMobile());
 		#endif
 
-	}
-
-	public bool isSlideTouched = false;
-
-	private IEnumerator MoveMobile() {
-		while (true) {
-			if (isSlideTouched && (slide.value < 40f || slide.value > 60f)) {
-				if (slide.value < 50f)
-					coeffPos = -2f;
-				else
-					coeffPos = 2f;
-				//coeffPos = (slide.normalizedValue - 0.5f)*2;
-			} else
-				coeffPos = 0f;
-			yield return new WaitForSeconds (0.01f);	
-
-		}
 	}
 }

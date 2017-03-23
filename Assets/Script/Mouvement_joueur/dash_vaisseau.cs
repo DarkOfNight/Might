@@ -9,14 +9,11 @@ public class dash_vaisseau : MonoBehaviour {
 
 	public bool gauche = false, droite = false;
 	public Button buttonGauche, buttonDroit;
-	public Slider slideMouvement;
 
 	void Start(){
 
 		GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
 		for (int i = 0; i < buttons.Length; i++) {
-			if (buttons [i].name == "SliderMouvement")
-				slideMouvement = buttons [i].GetComponent<Slider>();
 			if (buttons [i].name == "DashGauche")
 				buttonGauche = buttons [i].GetComponent<Button>();
 			if (buttons [i].name == "DashDroit")

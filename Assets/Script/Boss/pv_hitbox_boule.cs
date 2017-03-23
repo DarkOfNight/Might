@@ -44,6 +44,7 @@ public class pv_hitbox_boule : MonoBehaviour {
 	}
 
 	void Update(){
+		if(Time.timeScale == 0)return;
 		if (PV <= 0) {
 			gameObject.GetComponentInParent<pv_papatte> ().PV_papatte -= 1;
 			Destroy (gameObject.GetComponent<CircleCollider2D>());

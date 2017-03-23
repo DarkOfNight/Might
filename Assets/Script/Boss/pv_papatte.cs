@@ -15,6 +15,7 @@ public class pv_papatte : MonoBehaviour {
 	}
 
 	void Update () {
+		if(Time.timeScale == 0)return;
 		if (PV_papatte == 0) {
 			if (gameObject.GetComponentInParent<Pattern>().attaque==GD){
 				gameObject.GetComponentInParent<Pattern>().attaque=0;
