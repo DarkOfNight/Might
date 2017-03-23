@@ -31,14 +31,12 @@ public class movement_base : MonoBehaviour {
 		}
 		#elif UNITY_ANDROID
 
-
-		if (!isDashed && droite &&(wall!=1)){
-			gameObject.transform.Translate(new Vector3 (vitesse, 0)*Time.deltaTime);
-			wall=0;
-		}
-		else if (!isDashed && !droite &&(wall!=2)){
-			gameObject.transform.Translate(new Vector3 (-vitesse, 0)*Time.deltaTime);
-			wall=0;
+		if (Input.touchCount > 0){
+		float touchPos = Input.GetTouch(0).deltaPosition.x;
+		if (!isDashed && (wall!=1 && wall != 2)){
+				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3 (touchPos, gameObject.transform.position.y), vitesse);
+				wall=0;
+			}
 		}
 		#endif
 	}
