@@ -21,6 +21,7 @@ public class GestionInstances : MonoBehaviour {
 	 * a=1	  Nombre vaisseau
 	 * a=2	  N° du vaisseau / Ennemis
 	 * a=3	  Réapparait tant que les autres Ennemis ne sont pas morts (quota a1) oui->1 non->0
+	 * a=5	  ID du mouvement
 	 */
 	Object[,,,] QuadrillageVague = null;
 
@@ -28,7 +29,7 @@ public class GestionInstances : MonoBehaviour {
 		//Recupération via le niveau et VaguesNiveau
 		string[] infoLevel = PlayerPrefs.GetString ("Player.PlayLevel", "001.001").Split('.');   // [0]-> Chapitre   [1]-> Level       Chapitre0 -> Tuto
 		nbVague = VaguesNiveau [int.Parse(infoLevel[0]), int.Parse(infoLevel[1])-1];
-		QuadrillageVague = new Object[7, 7, nbVague, 4];
+		QuadrillageVague = new Object[7, 7, nbVague, 5];
 
 		//Remplissage QuadrillageVague
 		RemplissageQuadrillage(int.Parse(infoLevel[0]), int.Parse(infoLevel[1]));
@@ -42,7 +43,7 @@ public class GestionInstances : MonoBehaviour {
 		 * ligne -> [x,*****]
 		 * dans la ligne : 	entrechaque ';' -> [**, y, *******]
 		 * 									entrechaque ',' -> [******, aX,*****] : 
-		 *                					format : "a0,a1,a2,a3;a0,a1,a2,a3;*****;*******
+		 *                					format : "a0,a1,a2,a3,a4;a0,a1,a2,a3,a4;*****;*******
 		 * 
 		 * 
 		 * si ligne = "***" -> new vague  -> [******, vague, *****]
