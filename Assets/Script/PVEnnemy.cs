@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class basicEnnemy_8PV : MonoBehaviour {
+public class PVEnnemy : MonoBehaviour {
 
-	int PV=8;
+	public int PV;
 
 	void OnTriggerEnter2D(Collider2D col){
-		switch (col.gameObject.tag) {
-		case "TirJoueur1PV":
-			PV -= 1;
+		/*switch (col.gameObject.tag) {
+		case "TirJoueur1PV":*/
+		if (col.gameObject.tag.StartsWith ("TirJoueur") && col.gameObject.tag.EndsWith ("PV") && col.gameObject.tag.Substring (9).Remove (col.gameObject.tag.Substring (9).Length - 2) != "") {
+			PV -= int.Parse (col.gameObject.tag.Substring (9).Remove (col.gameObject.tag.Substring (9).Length - 2));
+			Destroy (col.gameObject);
+		}
+
+		/*
 			break;
 		case "TirJoueur2PV":
 			PV -= 2;
@@ -31,7 +36,7 @@ public class basicEnnemy_8PV : MonoBehaviour {
 		case "TirJoueur8PV":
 			PV -= 8;
 			break;
-		}
+		}*/
 	}
 
 	void Update(){

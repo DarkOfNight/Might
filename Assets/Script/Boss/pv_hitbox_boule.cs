@@ -3,11 +3,18 @@ using System.Collections;
 
 public class pv_hitbox_boule : MonoBehaviour {
 
-	int PV=15;
+	public int PV=15;
 	bool fin=false;
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){
-		switch (col.gameObject.tag) {
+
+
+		if (col.gameObject.tag.StartsWith ("TirJoueur") && col.gameObject.tag.EndsWith ("PV") && col.gameObject.tag.Substring (9).Remove (col.gameObject.tag.Substring (9).Length - 2) != "") {
+			PV -= int.Parse (col.gameObject.tag.Substring (9).Remove (col.gameObject.tag.Substring (9).Length - 2));
+			StartCoroutine (flash ());
+		}
+
+		/*switch (col.gameObject.tag) {
 			case "TirJoueur1PV":
 				PV -= 1;
 				StartCoroutine (flash ());
@@ -40,7 +47,7 @@ public class pv_hitbox_boule : MonoBehaviour {
 				PV -= 8;
 				StartCoroutine (flash ());
 			break;
-		}
+		}*/
 	}
 
 	void Update(){
