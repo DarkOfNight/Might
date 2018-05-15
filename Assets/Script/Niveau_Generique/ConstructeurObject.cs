@@ -47,6 +47,8 @@ public class ConstructeurObject : MonoBehaviour {
 		var1.GetComponent<PVEnnemy> ().x = x;
 		var1.GetComponent<PVEnnemy> ().y = y;
 
+
+
 		var1.AddComponent<Rigidbody2D> ();
 		var1.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
 		var1.GetComponent<Rigidbody2D> ().simulated = true;
@@ -54,8 +56,10 @@ public class ConstructeurObject : MonoBehaviour {
 		var1.GetComponent<Rigidbody2D> ().sleepMode = RigidbodySleepMode2D.StartAwake;
 		var1.GetComponent<Rigidbody2D> ().interpolation = RigidbodyInterpolation2D.None;
 
-		var1.AddComponent<BoxCollider2D> ();
-		var1.GetComponent<BoxCollider2D> ().size = new Vector2 (0.2846097f, 0.5653049f);
+		var1.AddComponent<PolygonCollider2D> ();
+		var1.GetComponent<PolygonCollider2D> ().autoTiling = true;
+		//var1.AddComponent<BoxCollider2D> ();
+		//var1.GetComponent<BoxCollider2D> ().size = new Vector2 (0.2846097f, 0.5653049f);
 
 		//var1.AddComponent<DetectionDestroy> ();
 		//var1.GetComponent<DetectionDestroy> ().x = x;
