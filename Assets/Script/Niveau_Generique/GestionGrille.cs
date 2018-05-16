@@ -82,12 +82,11 @@ public class GestionGrille : MonoBehaviour {
 		return cadrillage.information [var1, var2, var3];
 	}
 
-
+	// Optimisation:  Open dans Class?
 
 	public void Open(int var1, int var2){
 		string inputFile = System.IO.File.ReadAllText(Application.dataPath + "/Levels/" + var1.ToString() +"-"+ var2.ToString() + ".lvlcrt");
-
-		cadrillage = JsonUtility.FromJson<CadreInformationLevel>(inputFile);
+		JsonUtility.FromJsonOverwrite(inputFile, cadrillage);
 		cadrillage.FileToInfo ();
 		cadrillage.FileToDate ();
 	}
