@@ -18,7 +18,7 @@ public class PVEnnemy : MonoBehaviour {
 	void Update(){
 		if(Time.timeScale == 0)return;
 		if (PV <= 0) {
-			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<GestionVague> ().EnnemyDestroyed (y, x);
+			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<GestionNiveau> ().EnnemyDestroyed (y, x);
 			Destroy (gameObject);
 		}
 	

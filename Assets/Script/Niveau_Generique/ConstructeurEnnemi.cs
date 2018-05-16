@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-public class ConstructeurObject : MonoBehaviour {
+public class ConstructeurEnnemi : MonoBehaviour {
 
 	/*
 	* 0 - type			0 normal 1 infini 2 boss
@@ -17,7 +18,6 @@ public class ConstructeurObject : MonoBehaviour {
 	*  -1 ou "---" = rien
 	*/ 
 
-	public GameObject /*objet_generic,*/ Script;
 	public Sprite[] image;
 	float[] positionObjectX = { -50f, -35f, -20f, 0f, 20f, 35f, 50f };
 	float[] positionObjectY = { 90f, 75f, 60f, 45f, 30f, 15f, 0f };
@@ -25,7 +25,7 @@ public class ConstructeurObject : MonoBehaviour {
 	int a = 0;
 
 
-	public void Gen(int y, int x, int[] info){
+	public void Pop(int y, int x, int[] info){
 		if (info [0] < 0)
 			return;
 		GameObject var1 = new GameObject ("Ennemi"+a.ToString());
